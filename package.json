@@ -1,0 +1,14 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc src/script/main.ts",
+    "watch": "tsc src/script/main.ts --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "tailwindcss": "^3.3.4"
+  }
+}
