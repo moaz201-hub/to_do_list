@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>To-Do List</title>
+</head>
+<body>
+    
+    <nav class="bg-linear-to-r from-violet-700 to-blue-600 text-white px-20 py-3 fixed top-0 w-full h-16 z-10">
+        <div class="flex w-full text-center items-center justify-between h-full ">
+            <div class="name text-2xl font-bold"><i class="fa-solid fa-bars-progress pr-1"></i> Kanban</div>
+            <div class="add cursor-pointer" id="openModalBtn">
+                <div class="btn text-violet-700 rounded-xl bg-white w-10 h-10 flex items-center justify-center 
+                            shadow-md shadow-violet-950/30 
+                            hover:shadow-xl hover:shadow-violet-400/50 
+                            transition-all duration-300 ease-out">
+                    <i class="fa-solid fa-plus"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+   <section class="mt-16 min-h-screen bg-[#f3f6f9] p-6 md:p-10 text-slate-800">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+
+            <!-- Column 1: To Do -->
+            <div class="bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-5 min-h-125 flex flex-col shadow-sm">
+            <!-- Column Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500">
+                <i class="fa-solid fa-clipboard-list text-sm"></i>
+                </div>
+                <div>
+                <h2 class="font-bold text-slate-900 text-base leading-tight">To Do</h2>
+                <span class="text-xs text-slate-400 font-medium">0 tasks</span>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="flex-1 flex flex-col items-center justify-center text-center p-6 text-slate-300">
+                <i class="fa-solid fa-folder-open text-5xl mb-3 text-slate-200"></i>
+                <p class="text-sm font-semibold text-slate-400">No tasks yet</p>
+                <p class="text-xs text-slate-400/80 mt-1">Click + to add one</p>
+            </div>
+            </div>
+
+            <!-- Column 2: In Progress -->
+            <div class="bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-5 min-h-125 flex flex-col shadow-sm">
+            <!-- Column Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-xl bg-amber-50 flex items-center justify-center text-amber-500">
+                <i class="fa-solid fa-spinner animate-spin text-sm"></i>
+                </div>
+                <div>
+                <h2 class="font-bold text-slate-900 text-base leading-tight">In Progress</h2>
+                <span class="text-xs text-slate-400 font-medium">1 task</span>
+                </div>
+            </div>
+
+            <!-- Task Cards Wrapper -->
+            <div class="space-y-4">
+                <!-- Task Card -->
+                <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                <!-- ID / Dot -->
+                <div class="flex items-center gap-2 text-xs text-slate-400 font-medium mb-2">
+                    <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                    <span>#001</span>
+                </div>
+
+                <!-- Content -->
+                <h3 class="font-bold text-slate-800 text-lg">task1</h3>
+                <p class="text-xs text-slate-500 mt-1 mb-4">uni one</p>
+
+                <!-- Badges -->
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-600">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> MEDIUM
+                    </span>
+                </div>
+
+                <!-- Timestamp -->
+                <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium mb-4">
+                    <i class="fa-regular fa-clock text-slate-400 text-[11px]"></i>
+                    <span>2d ago</span>
+                </div>
+
+                <!-- Divider & Actions -->
+                <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors">
+                    <i class="fa-solid fa-rotate-left text-[10px]"></i> To Do
+                    </button>
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-700 text-xs font-semibold transition-colors">
+                    <i class="fa-solid fa-check text-[10px]"></i> Complete
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Column 3: Completed -->
+            <div class="bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-5 min-h-125 flex flex-col shadow-sm">
+            <!-- Column Header -->
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center text-white">
+                <i class="fa-solid fa-check text-sm"></i>
+                </div>
+                <div>
+                <h2 class="font-bold text-slate-900 text-base leading-tight">Completed</h2>
+                <span class="text-xs text-slate-400 font-medium">1 task</span>
+                </div>
+            </div>
+
+            <!-- Task Cards Wrapper -->
+            <div class="space-y-4">
+                <!-- Task Card -->
+                <div class="bg-white border border-slate-100 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                <!-- ID / Dot -->
+                <div class="flex items-center gap-2 text-xs text-slate-400 font-medium mb-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span>#002</span>
+                </div>
+
+                <!-- Content (Strikethrough) -->
+                <h3 class="font-bold text-slate-400 text-lg line-through">argawegr</h3>
+                <p class="text-xs text-slate-400 mt-1 mb-4">garsa</p>
+
+                <!-- Badges -->
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-50 text-amber-600">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> MEDIUM
+                    </span>
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-700">
+                    <i class="fa-solid fa-check text-[10px]"></i> DONE
+                    </span>
+                </div>
+
+                <!-- Timestamp -->
+                <div class="flex items-center gap-1.5 text-xs text-slate-400 font-medium mb-4">
+                    <i class="fa-regular fa-clock text-slate-400 text-[11px]"></i>
+                    <span>2d ago</span>
+                </div>
+
+                <!-- Divider & Actions -->
+                <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors">
+                    <i class="fa-solid fa-rotate-left text-[10px]"></i> To Do
+                    </button>
+                    <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-700 text-xs font-semibold transition-colors">
+                    <i class="fa-solid fa-play text-[10px]"></i> Start
+                    </button>
+                </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <div id="taskModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+    
+        <!-- Modal Card -->
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-slate-100">
+            
+            <!-- Header -->
+            <div class="flex items-center justify-between px-6 py-5 border-b border-slate-100">
+            <h2 class="text-xl font-bold text-slate-800">Create New Task</h2>
+            <button id="closeModalBtn" class="text-slate-400 hover:text-slate-600 transition-colors p-1 rounded-lg">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            </div>
+
+            <!-- Form -->
+            <form id="taskForm" class="p-6 space-y-5">
+            
+            <!-- Task Title -->
+            <div>
+                <label class="flex items-center gap-2 text-xs font-bold text-slate-600 mb-2">
+                <i class="fa-solid fa-heading text-slate-400"></i>
+                Task Title <span class="text-red-500">*</span>
+                </label>
+                <input 
+                type="text" 
+                id="taskTitle"
+                placeholder="What needs to be done?" 
+                required 
+                class="w-full px-4 py-3 rounded-xl border border-violet-500 ring-2 ring-violet-500/20 text-slate-800 placeholder-slate-400 text-sm focus:outline-none transition-all"
+                />
+            </div>
+
+            <!-- Priority & Due Date -->
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                <label class="flex items-center gap-2 text-xs font-bold text-slate-600 mb-2">
+                    <i class="fa-solid fa-flag text-slate-400"></i>
+                    Priority
+                </label>
+                <select id="taskPriority" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-sm focus:border-violet-500 focus:outline-none bg-white transition-all">
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                </select>
+                </div>
+
+                <div>
+                <label class="flex items-center gap-2 text-xs font-bold text-slate-600 mb-2">
+                    <i class="fa-solid fa-calendar-days text-slate-400"></i>
+                    Due Date
+                </label>
+                <input 
+                    type="date" 
+                    id="taskDueDate"
+                    class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-sm focus:border-violet-500 focus:outline-none transition-all"
+                />
+                </div>
+            </div>
+
+            <!-- Description -->
+            <div>
+                <label class="flex items-center gap-2 text-xs font-bold text-slate-600 mb-2">
+                <i class="fa-solid fa-align-left text-slate-400"></i>
+                Description
+                </label>
+                <textarea 
+                id="taskDescription"
+                rows="4" 
+                maxlength="500"
+                placeholder="Add more details about this task..." 
+                class="w-full px-4 py-3 rounded-xl border border-slate-200 text-slate-800 placeholder-slate-400 text-sm focus:border-violet-500 focus:outline-none transition-all resize-none"
+                ></textarea>
+                <div id="charCount" class="text-right text-[11px] text-slate-400 mt-1">0/500</div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center justify-between gap-3 pt-2">
+                <button 
+                type="button" 
+                id="cancelModalBtn" 
+                class="w-1/2 py-3 px-4 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-all"
+                >
+                Cancel
+                </button>
+                
+                <button 
+                type="submit" 
+                class="w-1/2 py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm transition-all shadow-md shadow-indigo-500/20 flex items-center justify-center gap-2"
+                >
+                <i class="fa-solid fa-plus text-xs"></i>
+                Add Task
+                </button>
+            </div>
+
+            </form>
+        </div>
+
+    </div>
+    
+    <footer class="bg-linear-to-r from-violet-700 to-blue-600 text-white px-20 py-3 fixed bottom-0 w-full h-10 z-10">
+        <div class="flex w-full text-center items-center justify-between h-full ">
+            <div class="w-full text-center">© 2026 Kanban. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script src="./script/main.js"></script>
+</body>
+</html>
